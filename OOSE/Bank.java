@@ -1,6 +1,9 @@
 import java.io.ObjectInputStream.GetField;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Bank {
@@ -110,13 +113,19 @@ public class Bank {
 		try {
 			System.out.println("customerNumber : "+customerNumber); 
 
-			Account[] account;
-			account = new Account[customerNumber];
-			System.out.println("account.length : "+account.length);
-			System.out.println("account Name : "+((Account) account[customerNumber]).accountName);
-			System.out.println("account pin : "+Bank.Account.getAccountPin());  
-			System.out.println("account Balance : "+Bank.Account.getAccountBalance());
-			System.out.println("account ID : "+Bank.Account.getAccountId());
+		    Account account;
+			account = new Account( " ", customerNumber, 0, 0);
+
+
+			int accountPin = account.getAccountPin();
+			int accountBalance = account.getAccountBalance();
+			int accountId = account.getAccountId();
+			String accountName = account.getAccountName();
+			System.out.println("account Name : "+accountName);
+			//System.out.println("account Name : "+((Account) account[customerNumber]).getAccountName());
+			System.out.println("account pin : "+accountPin);  
+			System.out.println("account Balance : "+accountBalance);
+			System.out.println("account ID : "+accountId);
 			
 			// for (int i = 0; i < account.length; i++) {
 			// 	if (customerNumber == ((Account) account[i]).accountId) {
@@ -164,44 +173,55 @@ public class Bank {
 
 public static class Account {
 	
-	private static int accountPin;
-	private static int accountId;
-	private static String accountName;
-	private static int accountBalance;
+	private int accountPin;
+	private int accountId;
+	private String accountName;
+	private int accountBalance;
+	private List<Account> accountList = new ArrayList<>();
+	
+	public Account(int accountId) {
+		 
+		 
+		// Account[] account;
+		// account = new Account[accountId];
+		
+		// this.accountName = ((Account) account[accountId]).accountName;
+		// this.accountId = ((Account) account[accountId]).accountId;
+		// this.accountPin = ((Account) account[accountId]).accountPin;
+		// this.accountBalance = ((Account) account[accountId]).accountBalance;
 
-	public Account() {
-		this.accountPin = 0;
-		this.accountId = 0;
-		this.accountName = "";
-		this.accountBalance = 0;
-	}
+	 
+	}	
 
+	
 	public Account(String accountName, int accountId, int accountPin, int accountBalance) {
 
 		this.accountPin = accountPin;
 		this.accountId = accountId;
 		this.accountName = accountName;
 		this.accountBalance = accountBalance;
-
-		System.out.println("\n Your account has been created!" + " Account Name: " + accountName + " Account ID: " + accountId + " Account Pin: " + accountPin + " Account Balance: " + accountBalance);
+		accountList.add(this);
+		System.out.println(accountList);
+		System.out.println("Created!" + " Account Name: " + accountName + " Account ID: " + accountId + " Account Pin: " + accountPin + " Account Balance: " + accountBalance);
 		
 	}
 
 
 
-	public static int getAccountPin() {
+	public int getAccountPin() {
+
 		return accountPin;
 	}
 
-	public static int getAccountId() {
+	public int getAccountId() {
 		return accountId;
 	}
 
-	public static String getAccountName() {
+	public String getAccountName() {
 		return accountName;
 	}
 
-	public static int getAccountBalance() {
+	public int getAccountBalance() {
 		return accountBalance;
 	}
 
