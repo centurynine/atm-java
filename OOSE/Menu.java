@@ -1,7 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Account {
+public class Menu {
     static Scanner inputChoice = new Scanner(System.in);
 	static Scanner inputAccountName = new Scanner(System.in);
 	static Scanner inputAccountId = new Scanner(System.in);
@@ -13,21 +13,21 @@ public class Account {
 		boolean end = false;
 		int customerNumber = 0;
 		int pinNumber = 0;
+
+
 		while (!end) {
 			try {
 				System.out.print("\nEnter your customer number: ");
 				customerNumber = inputAccountId.nextInt();
 				System.out.print("\nEnter your PIN number: ");
 				pinNumber = inputAccountPin.nextInt();
-				// while (!end) {
-				// 	Map.Entry pair = (Map.Entry) it.next();
-				// 	Account acc = (Account) pair.getValue();
-				// 	if (data.containsKey(customerNumber) && pinNumber == acc.getPinNumber()) {
-				// 		getAccountType(acc);
-				// 		end = true;
-				// 		break;
-				// 	}
+			 
+				// if(customerNumber == account[customerNumber].getAccountId() && pinNumber == account[customerNumber].getPin()){
+				// 	System.out.println("\nWelcome " + account[customerNumber].getAccountName());
+				// 	end = true;
 				// }
+
+
 				if (!end) {
 					System.out.println("\nWrong Customer Number or Pin Number");
 				}
