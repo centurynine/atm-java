@@ -44,7 +44,6 @@ public class Bank {
 
 	public static void manageAccount() {
 		boolean holderAccount = true;
-		boolean holderLogin = true;
 		int accountCount = 0;
 		System.out.print("\n Enter amount of all account: ");
 		int accountLimit = inputAccountLimit.nextInt();
@@ -61,30 +60,34 @@ public class Bank {
 				int accountPin = inputAccountPin.nextInt();
 				System.out.print(" Enter your account balance: ");
 				int accountBalance = inputAccountBalance.nextInt();
-				if(accountName.trim().isEmpty() || accountId.trim().isEmpty()){
+				if (accountName.trim().isEmpty() || accountId.trim().isEmpty()) {
 					System.out.println("Please enter all information.");
 					i--;
 					continue;
 				}
-				if(i == 0){
-				account[i] = new Account(accountName, accountId, accountPin, accountBalance);
-				accountCount++;
+				if (accountName.trim().length() > 50 || accountId.trim().length() > 13) {
+					System.out.println("too many characters.");
+					i--;
+					continue;
 				}
-				else{
-					for(int j = 0; j < accountCount; j++){
-						if(accountId.equals(((Account) account[j]).getAccountId())){
-							System.out.println("Account ID is already exist.");
+				if ( i == 0 ) {
+					account[i] = new Account(accountName, accountId, accountPin, accountBalance);
+					accountCount++;
+				} else {
+					for (int j = 0; j < accountCount; j++) {
+						if (account[j].getAccountId().equals(accountId)) {
+							System.out.println("Account ID already exists.");
 							i--;
 							break;
-						}
-						else{
+						} else if (j == accountCount - 1) {
 							account[i] = new Account(accountName, accountId, accountPin, accountBalance);
 							accountCount++;
 							break;
 						}
 					}
 				}
- 
+
+
 			}
 			System.out.println("******************************");
 
@@ -100,18 +103,16 @@ public class Bank {
 		} catch (InputMismatchException e) {
 			System.out.println("\nError " + e + " Please try again");
 		}
-		while (holderLogin == true) {
-			holderAccount = true;
+		while(holderAccount == true){
 			System.out.println("\n ########## Login Menu ##########");
 			System.out.print("\n Enter your account ID: ");
 			String accountLoginId = inputAccountId.nextLine();
 			System.out.print(" Enter your account pin: ");
 			int accountLoginPin = inputAccountPin.nextInt();
-			holderLogin = false;
-			while(holderAccount == true){
 			for (int k = 0; k < accountLimit; k++) {
 				if (accountLoginId.equals(((Account) account[k]).getAccountId())) {
 					if (accountLoginPin == ((Account) account[k]).getAccountPin()) {
+						System.out.println("\n **** Login Success!");
 						System.out.println(" **** Account Name: " + ((Account) account[k]).getAccountName() + " Account ID: "
 								+ ((Account) account[k]).getAccountId() + " Account Pin: " + ((Account) account[k]).getAccountPin()
 								+ " Account Balance: " + ((Account) account[k]).getAccountBalance());
@@ -119,8 +120,7 @@ public class Bank {
 						System.out.println("Welcome : " + ((Account) account[k]).getAccountName());
 						System.out.println(" Type 1 - Check Balance");
 						System.out.println(" Type 2 - Withdraw");
-						System.out.println(" Type 3 - Change account");
-						System.out.println(" Type 4 - Exit");
+						System.out.println(" Type 3 - Exit");
 						System.out.print("Choice: ");
 						int choice = inputChoice.nextInt();
 					
@@ -129,7 +129,7 @@ public class Bank {
 								System.out.println("Your Balance is " + ((Account) account[k]).getAccountBalance());
 								break;
 							case 2:
-								System.out.print("Enter amount to withdraw: ");
+								System.out.println("Enter amount to withdraw: ");
 								int withdraw = inputAccountWithdraw.nextInt();
 								if (withdraw > ((Account) account[k]).getAccountBalance()) {
 									System.out.println("Insufficient Balance");
@@ -142,14 +142,8 @@ public class Bank {
 								}
 								break;
 							case 3:
-								System.out.println("Change Account.");
-								holderAccount = false;
-								holderLogin = true;
-								break;
-							case 4:
 								System.out.println("Exit.");
 								holderAccount = false;
-								holderLogin = false;
 								break;
 							default:
 								System.out.println("Invalid Choice.");
@@ -165,8 +159,7 @@ public class Bank {
 			}
 		}
 	}
+
 	}
 
-}}
-
-	
+}
