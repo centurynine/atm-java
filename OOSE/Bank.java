@@ -1,9 +1,4 @@
-import java.io.ObjectInputStream.GetField;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Bank {
@@ -76,7 +71,6 @@ public class Bank {
 				System.out.println("No."+ no +" Name: " + ((Account) account[j]).accountName + " Account ID: " + ((Account) account[j]).accountId + " Account Pin: " + ((Account) account[j]).accountPin + " Account Balance: " + ((Account) account[j]).accountBalance);
 			}
 	
-
 		}
 		catch (InputMismatchException e) {
 			System.out.println("\nError " +e+ " Please try again");
@@ -87,23 +81,29 @@ public class Bank {
 		System.out.println("\n Enter your account pin: ");
 		int accountLoginPin = inputAccountPin.nextInt();
 		for (int k = 0; k < accountLimit; k++) {
-			if (accountLoginId.equals(((Account) account[k]).accountId) && accountLoginPin == ((Account) account[k]).accountPin) {
-				System.out.println(" Login Success!");
-				System.out.println(" Account Name: " + ((Account) account[k]).accountName + " Account ID: " + ((Account) account[k]).accountId + " Account Pin: " + ((Account) account[k]).accountPin + " Account Balance: " + ((Account) account[k]).accountBalance);
-				System.out.println("****************** ACCOUNT MENU ******************");
-				System.out.println("Welcome : " + ((Account) account[k]).accountName);
-				System.out.println(" Type 1 - Deposit");
-				System.out.println(" Type 2 - Withdraw");
-				System.out.println(" Type 3 - Transfer");
-				System.out.println(" Type 4 - Check Balance");
-				System.out.println(" Type 5 - Exit");
-				System.out.println("Choice: ");
-				int choice = inputChoice.nextInt();
+			if (accountLoginId.equals(((Account) account[k]).accountId)) {
+				if(accountLoginPin == ((Account) account[k]).accountPin){
+					System.out.println(" **** Login Success!");
+					System.out.println(" **** Account Name: " + ((Account) account[k]).accountName + " Account ID: " + ((Account) account[k]).accountId + " Account Pin: " + ((Account) account[k]).accountPin + " Account Balance: " + ((Account) account[k]).accountBalance);
+					System.out.println("****************** ACCOUNT MENU ******************");
+					System.out.println("Welcome : " + ((Account) account[k]).accountName);
+					System.out.println(" Type 1 - Deposit");
+					System.out.println(" Type 2 - Withdraw");
+					System.out.println(" Type 3 - Transfer");
+					System.out.println(" Type 4 - Check Balance");
+					System.out.println(" Type 5 - Exit");
+					System.out.println("Choice: ");
+					int choice = inputChoice.nextInt();
+					welcomeMenu();
+				}
+				else {
+					
+					System.out.println("\n Login Failed!");
+				}
 
 			}
 			else {
-				
-				System.out.println("\n Login Failed!");
+				 
 			}
 		}
 
