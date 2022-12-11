@@ -37,7 +37,7 @@ public class Bank {
 						System.out.println("\nInvalid Choice.");
 				}
 			} catch (InputMismatchException e) {
-				System.out.println("\nInvalid Choice.");
+				System.out.println("\nError" + e);
 			}
 		}
 	}
