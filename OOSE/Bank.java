@@ -109,28 +109,29 @@ public class Bank {
 			String accountLoginId = inputAccountId.nextLine();
 			System.out.print(" Enter your account pin: ");
 			int accountLoginPin = inputAccountPin.nextInt();
+			System.out.println("\n #################################");
 			for (int k = 0; k < accountLimit; k++) {
+				int choice = 0;
 				if (accountLoginId.equals(((Account) account[k]).getAccountId())) {
 					if (accountLoginPin == ((Account) account[k]).getAccountPin()) {
 						System.out.println("\n **** Login Success!");
 						System.out.println(" **** Account Name: " + ((Account) account[k]).getAccountName() + " Account ID: "
 								+ ((Account) account[k]).getAccountId() + " Account Pin: " + ((Account) account[k]).getAccountPin()
 								+ " Account Balance: " + ((Account) account[k]).getAccountBalance());
+						while (choice != 4) {
 						System.out.println("****************** ACCOUNT MENU ******************");
 						System.out.println("Welcome : " + ((Account) account[k]).getAccountName());
 						System.out.println(" Type 1 - Check Balance");
 						System.out.println(" Type 2 - Withdraw");
 						System.out.println(" Type 3 - Change account");
-						System.out.println(" Type 4 - Exit");
 						System.out.print("Choice: ");
-						int choice = inputChoice.nextInt();
-					
+						choice = inputChoice.nextInt();
 						switch (choice) {
 							case 1:
-								System.out.println("Your Balance is " + ((Account) account[k]).getAccountBalance());
+								System.out.println("\n === Your Balance is " + ((Account) account[k]).getAccountBalance());
 								break;
 							case 2:
-								System.out.println("Enter amount to withdraw: ");
+								System.out.print("\n === Enter amount to withdraw: ");
 								int withdraw = inputAccountWithdraw.nextInt();
 								if (withdraw > ((Account) account[k]).getAccountBalance()) {
 									System.out.println("Insufficient Balance");
@@ -143,20 +144,20 @@ public class Bank {
 								}
 								break;
 							case 3:
-								System.out.println("Change account.");
+								System.out.println("\n Change account.");
 								holderAccount = true;
 								break;
 							case 4:
-								System.out.println("Exit.");
+								System.out.println("\n Exit.");
 								holderAccount = false;
 								break;
 							default:
-								System.out.println("Invalid Choice.");
+								System.out.println("\n Invalid Choice.");
 						}
-				
+					}
 				} else {
 
-					System.out.println("\n!!! Login Failed !!!");
+					System.out.println("\n!!! Invalid Password !!!");
 				}
 
 			} else {
