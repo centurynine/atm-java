@@ -3,7 +3,7 @@ public class Account {
     private int accountPin;
     private String accountId;
     private String accountName;
-    int accountBalance;
+    private int accountBalance;
 
     public Account(String accountName, String accountId, int accountPin, int accountBalance) {
 
@@ -33,8 +33,10 @@ public class Account {
         return accountBalance;
     }
 
-    public void setAccountBalance(int accountBalance) {
-        this.accountBalance = accountBalance;
+    public void setAccountBalance(int balance) {
+        this.accountBalance = balance;
     }
 
 }
+
+
