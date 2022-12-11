@@ -120,7 +120,8 @@ public class Bank {
 						System.out.println("Welcome : " + ((Account) account[k]).getAccountName());
 						System.out.println(" Type 1 - Check Balance");
 						System.out.println(" Type 2 - Withdraw");
-						System.out.println(" Type 3 - Exit");
+						System.out.println(" Type 3 - Change account");
+						System.out.println(" Type 4 - Exit");
 						System.out.print("Choice: ");
 						int choice = inputChoice.nextInt();
 					
@@ -142,6 +143,10 @@ public class Bank {
 								}
 								break;
 							case 3:
+								System.out.println("Change account.");
+								holderAccount = true;
+								break;
+							case 4:
 								System.out.println("Exit.");
 								holderAccount = false;
 								break;
