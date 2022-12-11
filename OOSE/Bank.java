@@ -11,12 +11,14 @@ public class Bank {
 	static Scanner inputAccountWithdraw = new Scanner(System.in);
 
 	public static void main(String[] args) {
+
 		welcomeMenu();
+
 	}
 
 	public static void welcomeMenu() {
 		boolean end = false;
-		System.out.println("@@@@  Welcome to the RmuttBank! @@@@");
+		System.out.println("@@@@  Welcome to the RMUTT BANK @@@@");
 		while (end == false) {
 			try {
 				System.out.println("\n Type 1 - Create Account");
@@ -103,7 +105,10 @@ public class Bank {
 		} catch (InputMismatchException e) {
 			System.out.println("\nError " + e + " Please try again");
 		}
+
+		int choice = 0;
 		while(holderAccount == true){
+			boolean holderMenu = true;
 			System.out.println("\n ########## Login Menu ##########");
 			System.out.print("\n Enter your account ID: ");
 			String accountLoginId = inputAccountId.nextLine();
@@ -111,22 +116,22 @@ public class Bank {
 			int accountLoginPin = inputAccountPin.nextInt();
 			System.out.println("\n #################################");
 			for (int k = 0; k < accountLimit; k++) {
-				int choice = 0;
 				if (accountLoginId.equals(((Account) account[k]).getAccountId())) {
 					if (accountLoginPin == ((Account) account[k]).getAccountPin()) {
 						System.out.println("\n **** Login Success!");
 						System.out.println(" **** Account Name: " + ((Account) account[k]).getAccountName() + " Account ID: "
 								+ ((Account) account[k]).getAccountId() + " Account Pin: " + ((Account) account[k]).getAccountPin()
 								+ " Account Balance: " + ((Account) account[k]).getAccountBalance());
-						while (choice != 4) {
-						System.out.println("****************** ACCOUNT MENU ******************");
-						System.out.println("Welcome : " + ((Account) account[k]).getAccountName());
-						System.out.println(" Type 1 - Check Balance");
-						System.out.println(" Type 2 - Withdraw");
-						System.out.println(" Type 3 - Change account");
-						System.out.print("Choice: ");
-						choice = inputChoice.nextInt();
-						switch (choice) {
+						while (holderMenu == true) {
+							System.out.println("****************** ACCOUNT MENU ******************");
+							System.out.println("Welcome : " + ((Account) account[k]).getAccountName());
+							System.out.println(" Type 1 - Check Balance");
+							System.out.println(" Type 2 - Withdraw");
+							System.out.println(" Type 3 - Change account");
+							System.out.println(" Type 4 - Exit");
+							System.out.print("Choice: ");
+							choice = inputChoice.nextInt();
+							switch (choice) {
 							case 1:
 								System.out.println("\n === Your Balance is " + ((Account) account[k]).getAccountBalance());
 								break;
@@ -135,21 +140,23 @@ public class Bank {
 								int withdraw = inputAccountWithdraw.nextInt();
 								if (withdraw > ((Account) account[k]).getAccountBalance()) {
 									System.out.println("Insufficient Balance");
-								} else {
-									int balance = ((Account) account[k]).getAccountBalance();
-									balance -= withdraw;
-									((Account) account[k]).setAccountBalance(balance);
-									System.out.println("Withdraw Success!");
-									System.out.println("Your Balance is " + ((Account) account[k]).getAccountBalance());
-								}
+									} else {
+										int balance = ((Account) account[k]).getAccountBalance();
+										balance -= withdraw;
+										((Account) account[k]).setAccountBalance(balance);
+										System.out.println("Withdraw Success!");
+										System.out.println("Your Balance is " + ((Account) account[k]).getAccountBalance());
+									}
 								break;
 							case 3:
 								System.out.println("\n Change account.");
 								holderAccount = true;
+								holderMenu = false;
 								break;
 							case 4:
 								System.out.println("\n Exit.");
 								holderAccount = false;
+								holderMenu = false;
 								break;
 							default:
 								System.out.println("\n Invalid Choice.");
