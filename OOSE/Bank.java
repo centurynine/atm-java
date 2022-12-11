@@ -8,6 +8,7 @@ public class Bank {
 	static Scanner inputAccountPin = new Scanner(System.in);
 	static Scanner inputAccountBalance = new Scanner(System.in);
 	static Scanner inputAccountLimit = new Scanner(System.in);
+	static Scanner inputAccountWithdraw = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		welcomeMenu();
@@ -42,6 +43,7 @@ public class Bank {
 	}
 
 	public static void manageAccount() {
+		boolean holderAccount = true;
 		System.out.print("\n Enter amount of all account: ");
 		int accountLimit = inputAccountLimit.nextInt();
 		Account[] account;
@@ -74,28 +76,50 @@ public class Bank {
 		} catch (InputMismatchException e) {
 			System.out.println("\nError " + e + " Please try again");
 		}
-		System.out.println("\n ########## Login Menu ##########");
-		System.out.print("\n Enter your account ID: ");
-		String accountLoginId = inputAccountId.nextLine();
-		System.out.print(" Enter your account pin: ");
-		int accountLoginPin = inputAccountPin.nextInt();
-		for (int k = 0; k < accountLimit; k++) {
-			if (accountLoginId.equals(((Account) account[k]).accountId)) {
-				if (accountLoginPin == ((Account) account[k]).accountPin) {
-					System.out.println("\n **** Login Success!");
-					System.out.println(" **** Account Name: " + ((Account) account[k]).accountName + " Account ID: "
-							+ ((Account) account[k]).accountId + " Account Pin: " + ((Account) account[k]).accountPin
-							+ " Account Balance: " + ((Account) account[k]).accountBalance);
-					System.out.println("****************** ACCOUNT MENU ******************");
-					System.out.println("Welcome : " + ((Account) account[k]).accountName);
-					System.out.println(" Type 1 - Deposit");
-					System.out.println(" Type 2 - Withdraw");
-					System.out.println(" Type 3 - Transfer");
-					System.out.println(" Type 4 - Check Balance");
-					System.out.println(" Type 5 - Exit");
-					System.out.println("Choice: ");
-					int choice = inputChoice.nextInt();
-					welcomeMenu();
+		while(holderAccount == true){
+			System.out.println("\n ########## Login Menu ##########");
+			System.out.print("\n Enter your account ID: ");
+			String accountLoginId = inputAccountId.nextLine();
+			System.out.print(" Enter your account pin: ");
+			int accountLoginPin = inputAccountPin.nextInt();
+			for (int k = 0; k < accountLimit; k++) {
+				if (accountLoginId.equals(((Account) account[k]).accountId)) {
+					if (accountLoginPin == ((Account) account[k]).accountPin) {
+						System.out.println("\n **** Login Success!");
+						System.out.println(" **** Account Name: " + ((Account) account[k]).accountName + " Account ID: "
+								+ ((Account) account[k]).accountId + " Account Pin: " + ((Account) account[k]).accountPin
+								+ " Account Balance: " + ((Account) account[k]).accountBalance);
+						System.out.println("****************** ACCOUNT MENU ******************");
+						System.out.println("Welcome : " + ((Account) account[k]).accountName);
+						System.out.println(" Type 1 - Check Balance");
+						System.out.println(" Type 2 - Withdraw");
+						System.out.println(" Type 3 - Exit");
+						System.out.print("Choice: ");
+						int choice = inputChoice.nextInt();
+					
+						switch (choice) {
+							case 1:
+								System.out.println("Your Balance is " + ((Account) account[k]).accountBalance);
+								break;
+							case 2:
+								System.out.println("Enter amount to withdraw: ");
+								int withdraw = inputAccountWithdraw.nextInt();
+								if (withdraw > ((Account) account[k]).accountBalance) {
+									System.out.println("Insufficient Balance");
+								} else {
+									((Account) account[k]).accountBalance -= withdraw;
+									System.out.println("Withdraw Success!");
+									System.out.println("Your Balance is " + ((Account) account[k]).accountBalance);
+								}
+								break;
+							case 3:
+								System.out.println("Exit.");
+								holderAccount = false;
+								break;
+							default:
+								System.out.println("Invalid Choice.");
+						}
+				
 				} else {
 
 					System.out.println("\n!!! Login Failed !!!");
@@ -105,6 +129,7 @@ public class Bank {
 
 			}
 		}
+	}
 
 	}
 
