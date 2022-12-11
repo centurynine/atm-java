@@ -25,7 +25,7 @@ public class Bank {
 				switch (choice) {
 					case 1:
 						System.out.print("\nCreate Account.");
-						createAccount();
+						manageAccount();
 						end = true;
 						break;
 					case 2:
@@ -41,7 +41,7 @@ public class Bank {
 		}
 	}
 
-	public static void createAccount() {
+	public static void manageAccount() {
 		System.out.print("\n Enter amount of all account: ");
 		int accountLimit = inputAccountLimit.nextInt();
 		Account[] account;
