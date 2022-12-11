@@ -13,19 +13,13 @@ public class Bank {
 	static Scanner inputAccountPin = new Scanner(System.in);
 	static Scanner inputAccountBalance = new Scanner(System.in);
 	static Scanner inputAccountLimit = new Scanner(System.in);
-	
-	private int balance;
-	private int pin;
-	private int accountId;
-	private String accountName;
-
+ 
 	public static void main(String[] args) {
 		welcomeMenu();
 
 	}
 
 	public static void welcomeMenu() {
-	    int accountLimit;
 		boolean end = false;
 		System.out.println("Welcome to the Bank!");
 		while (end == false) {
@@ -53,10 +47,7 @@ public class Bank {
 		int accountLimit = inputAccountLimit.nextInt();
 		Account[] account;
 		account = new Account[accountLimit];
-
 		try {
-			
-
 			for (int i = 0; i < accountLimit; i++) {
 				
 
@@ -100,6 +91,18 @@ public class Bank {
 			if (accountLoginId == ((Account) account[k]).accountId && accountLoginPin == ((Account) account[k]).accountPin) {
 				System.out.println("\n Login Success!");
 				System.out.println("\n Account Name: " + ((Account) account[k]).accountName + " Account ID: " + ((Account) account[k]).accountId + " Account Pin: " + ((Account) account[k]).accountPin + " Account Balance: " + ((Account) account[k]).accountBalance);
+				System.out.print("****************** ACCOUNT MENU ******************");
+				System.out.println("\n Type 1 - Deposit");
+				System.out.println("\n Type 2 - Withdraw");
+				System.out.println("\n Type 3 - Transfer");
+				System.out.println("\n Type 4 - Check Balance");
+				System.out.println("\n Type 5 - Exit");
+				System.out.print("\nChoice: ");
+				int choice = inputChoice.nextInt();
+				
+			}
+			else {
+				System.out.println("\n Login Failed!");
 			}
 		}
 
@@ -113,7 +116,7 @@ public static class Account {
 	private int accountId;
 	private String accountName;
 	private int accountBalance;
-	private List<Account> accountList = new ArrayList<>();
+ 
 	
 	public Account(String accountName, int accountId, int accountPin, int accountBalance) {
 
@@ -121,8 +124,7 @@ public static class Account {
 		this.accountId = accountId;
 		this.accountName = accountName;
 		this.accountBalance = accountBalance;
-		accountList.add(this);
-		System.out.println(accountList);
+ 
 		System.out.println("Created!" + " Account Name: " + accountName + " Account ID: " + accountId + " Account Pin: " + accountPin + " Account Balance: " + accountBalance);
 		
 	}
