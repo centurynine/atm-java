@@ -87,22 +87,22 @@ public class Bank {
 		System.out.println("\n Enter your account pin: ");
 		int accountLoginPin = inputAccountPin.nextInt();
 		for (int k = 0; k < accountLimit; k++) {
-			if (accountLoginId == ((Account) account[k]).accountId && accountLoginPin == ((Account) account[k]).accountPin) {
-				System.out.println("\n Login Success!");
-				System.out.println("\n Account Name: " + ((Account) account[k]).accountName + " Account ID: " + ((Account) account[k]).accountId + " Account Pin: " + ((Account) account[k]).accountPin + " Account Balance: " + ((Account) account[k]).accountBalance);
-				System.out.print("****************** ACCOUNT MENU ******************");
-				System.out.println("\n Type 1 - Deposit");
-				System.out.println("\n Type 2 - Withdraw");
-				System.out.println("\n Type 3 - Transfer");
-				System.out.println("\n Type 4 - Check Balance");
-				System.out.println("\n Type 5 - Exit");
-				System.out.print("\nChoice: ");
+			if (accountLoginId.equals(((Account) account[k]).accountId) && accountLoginPin == ((Account) account[k]).accountPin) {
+				System.out.println(" Login Success!");
+				System.out.println(" Account Name: " + ((Account) account[k]).accountName + " Account ID: " + ((Account) account[k]).accountId + " Account Pin: " + ((Account) account[k]).accountPin + " Account Balance: " + ((Account) account[k]).accountBalance);
+				System.out.println("****************** ACCOUNT MENU ******************");
+				System.out.println("Welcome : " + ((Account) account[k]).accountName);
+				System.out.println(" Type 1 - Deposit");
+				System.out.println(" Type 2 - Withdraw");
+				System.out.println(" Type 3 - Transfer");
+				System.out.println(" Type 4 - Check Balance");
+				System.out.println(" Type 5 - Exit");
+				System.out.println("Choice: ");
 				int choice = inputChoice.nextInt();
 
 			}
 			else {
-				System.out.println(accountLoginId);
-				System.out.println(((Account) account[k]).accountId);
+				
 				System.out.println("\n Login Failed!");
 			}
 		}
@@ -117,7 +117,6 @@ public static class Account {
 	private String accountId;
 	private String accountName;
 	private int accountBalance;
- 
 	
 	public Account(String accountName, String accountId, int accountPin, int accountBalance) {
 
@@ -133,7 +132,6 @@ public static class Account {
 
 
 	public int getAccountPin() {
-
 		return accountPin;
 	}
 
