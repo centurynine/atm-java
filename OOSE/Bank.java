@@ -54,7 +54,7 @@ public class Bank {
 				System.out.println("\n Enter your account name: ");
 				String accountName = inputAccountName.nextLine();
 				System.out.println("\n Enter your account ID: ");
-				int accountId = inputAccountId.nextInt();
+				String accountId = inputAccountId.nextLine();
 				System.out.println("\n Enter your account pin: ");
 				int accountPin = inputAccountPin.nextInt();
 				System.out.println("\n Enter your account balance: ");
@@ -63,7 +63,7 @@ public class Bank {
 				account[i] = new Account(accountName, accountId, accountPin, accountBalance);
 				System.out.println("\n Your account has been created!");
 				String infoName = ((Account) account[i]).accountName;
-				int infoId = ((Account) account[i]).accountId;
+				String infoId = ((Account) account[i]).accountId;
 				int infoPin = ((Account) account[i]).accountPin;
 				int infoBalance = ((Account) account[i]).accountBalance;
 				System.out.println("\n Account Name: " + infoName + " Account ID: " + infoId + " Account Pin: " + infoPin + " Account Balance: " + infoBalance);
@@ -83,10 +83,9 @@ public class Bank {
 		}
 		System.out.println("\n Login Menu ");
 		System.out.println("\n Enter your account ID: ");
-		int accountLoginId = inputAccountId.nextInt();
+		String accountLoginId = inputAccountId.nextLine();
 		System.out.println("\n Enter your account pin: ");
 		int accountLoginPin = inputAccountPin.nextInt();
-
 		for (int k = 0; k < accountLimit; k++) {
 			if (accountLoginId == ((Account) account[k]).accountId && accountLoginPin == ((Account) account[k]).accountPin) {
 				System.out.println("\n Login Success!");
@@ -99,9 +98,11 @@ public class Bank {
 				System.out.println("\n Type 5 - Exit");
 				System.out.print("\nChoice: ");
 				int choice = inputChoice.nextInt();
-				
+
 			}
 			else {
+				System.out.println(accountLoginId);
+				System.out.println(((Account) account[k]).accountId);
 				System.out.println("\n Login Failed!");
 			}
 		}
@@ -113,12 +114,12 @@ public class Bank {
 public static class Account {
 	
 	private int accountPin;
-	private int accountId;
+	private String accountId;
 	private String accountName;
 	private int accountBalance;
  
 	
-	public Account(String accountName, int accountId, int accountPin, int accountBalance) {
+	public Account(String accountName, String accountId, int accountPin, int accountBalance) {
 
 		this.accountPin = accountPin;
 		this.accountId = accountId;
@@ -136,7 +137,7 @@ public static class Account {
 		return accountPin;
 	}
 
-	public int getAccountId() {
+	public String getAccountId() {
 		return accountId;
 	}
 
