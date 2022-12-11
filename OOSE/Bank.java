@@ -44,6 +44,7 @@ public class Bank {
 
 	public static void manageAccount() {
 		boolean holderAccount = true;
+		boolean holderLogin = true;
 		System.out.print("\n Enter amount of all account: ");
 		int accountLimit = inputAccountLimit.nextInt();
 		Account[] account;
@@ -76,16 +77,18 @@ public class Bank {
 		} catch (InputMismatchException e) {
 			System.out.println("\nError " + e + " Please try again");
 		}
-		while(holderAccount == true){
+		while (holderLogin == true) {
+			holderAccount = true;
 			System.out.println("\n ########## Login Menu ##########");
 			System.out.print("\n Enter your account ID: ");
 			String accountLoginId = inputAccountId.nextLine();
 			System.out.print(" Enter your account pin: ");
 			int accountLoginPin = inputAccountPin.nextInt();
+			holderLogin = false;
+			while(holderAccount == true){
 			for (int k = 0; k < accountLimit; k++) {
 				if (accountLoginId.equals(((Account) account[k]).accountId)) {
 					if (accountLoginPin == ((Account) account[k]).accountPin) {
-						System.out.println("\n **** Login Success!");
 						System.out.println(" **** Account Name: " + ((Account) account[k]).accountName + " Account ID: "
 								+ ((Account) account[k]).accountId + " Account Pin: " + ((Account) account[k]).accountPin
 								+ " Account Balance: " + ((Account) account[k]).accountBalance);
@@ -93,7 +96,8 @@ public class Bank {
 						System.out.println("Welcome : " + ((Account) account[k]).accountName);
 						System.out.println(" Type 1 - Check Balance");
 						System.out.println(" Type 2 - Withdraw");
-						System.out.println(" Type 3 - Exit");
+						System.out.println(" Type 3 - Change account");
+						System.out.println(" Type 4 - Exit");
 						System.out.print("Choice: ");
 						int choice = inputChoice.nextInt();
 					
@@ -102,7 +106,7 @@ public class Bank {
 								System.out.println("Your Balance is " + ((Account) account[k]).accountBalance);
 								break;
 							case 2:
-								System.out.println("Enter amount to withdraw: ");
+								System.out.print("Enter amount to withdraw: ");
 								int withdraw = inputAccountWithdraw.nextInt();
 								if (withdraw > ((Account) account[k]).accountBalance) {
 									System.out.println("Insufficient Balance");
@@ -113,8 +117,14 @@ public class Bank {
 								}
 								break;
 							case 3:
+								System.out.println("Change Account.");
+								holderAccount = false;
+								holderLogin = true;
+								break;
+							case 4:
 								System.out.println("Exit.");
 								holderAccount = false;
+								holderLogin = false;
 								break;
 							default:
 								System.out.println("Invalid Choice.");
@@ -129,6 +139,7 @@ public class Bank {
 
 			}
 		}
+	}
 	}
 
 	}
