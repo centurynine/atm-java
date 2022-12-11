@@ -30,16 +30,11 @@ public class Bank {
 		System.out.println("Welcome to the Bank!");
 		while (end == false) {
 			try {
-				System.out.println("\n Type 1 - Login");
-				System.out.println(" Type 2 - Create Account");
+				System.out.println(" Type 1 - Create Account");
 				System.out.print("\nChoice: ");
 				int choice = inputChoice.nextInt();
 				switch (choice) {
 				case 1:
-					login();
-					end = true;
-					break;
-				case 2:
 				System.out.println("\nCreate Account.");
 					createAccount();
 					end = true;
@@ -54,14 +49,13 @@ public class Bank {
 	}
 
 	public static void createAccount(){
+		System.out.println("\n Enter amount of all account: ");
+		int accountLimit = inputAccountLimit.nextInt();
+		Account[] account;
+		account = new Account[accountLimit];
 
-		
 		try {
-			System.out.println("\n Enter amount of all account: ");
-			int accountLimit = inputAccountLimit.nextInt();
-
-			Account[] account;
-			account = new Account[accountLimit];
+			
 
 			for (int i = 0; i < accountLimit; i++) {
 				
@@ -86,89 +80,31 @@ public class Bank {
 			}
 			System.out.println("******************************");
 
-			// for (int j = 0; j < accountLimit; j++) {
-			// 	int no = j+1;
-			// 	System.out.println("No."+ no +" Name: " + ((Account) account[j]).accountName + " Account ID: " + ((Account) account[j]).accountId + " Account Pin: " + ((Account) account[j]).accountPin + " Account Balance: " + ((Account) account[j]).accountBalance);
-			// }
+			for (int j = 0; j < accountLimit; j++) {
+				int no = j+1;
+				System.out.println("No."+ no +" Name: " + ((Account) account[j]).accountName + " Account ID: " + ((Account) account[j]).accountId + " Account Pin: " + ((Account) account[j]).accountPin + " Account Balance: " + ((Account) account[j]).accountBalance);
+			}
 	
 
 		}
 		catch (InputMismatchException e) {
 			System.out.println("\nError " +e+ " Please try again");
 		}
+		System.out.println("\n Login Menu ");
+		System.out.println("\n Enter your account ID: ");
+		int accountLoginId = inputAccountId.nextInt();
+		System.out.println("\n Enter your account pin: ");
+		int accountLoginPin = inputAccountPin.nextInt();
 
-		welcomeMenu();
+		for (int k = 0; k < accountLimit; k++) {
+			if (accountLoginId == ((Account) account[k]).accountId && accountLoginPin == ((Account) account[k]).accountPin) {
+				System.out.println("\n Login Success!");
+				System.out.println("\n Account Name: " + ((Account) account[k]).accountName + " Account ID: " + ((Account) account[k]).accountId + " Account Pin: " + ((Account) account[k]).accountPin + " Account Balance: " + ((Account) account[k]).accountBalance);
+			}
+		}
 
 	}
 
-	public static void login() {
-		int customerNumber = 0;
-		int pinNumber = 0;
-
-
-
-		System.out.println("\nLogin.");
-		System.out.print("\nEnter your customer number: ");
-		customerNumber = inputAccountId.nextInt();
-		try {
-			System.out.println("customerNumber : "+customerNumber); 
-
-		    Account account;
-			account = new Account( " ", customerNumber, 0, 0);
-
-
-			int accountPin = account.getAccountPin();
-			int accountBalance = account.getAccountBalance();
-			int accountId = account.getAccountId();
-			String accountName = account.getAccountName();
-			System.out.println("account Name : "+accountName);
-			//System.out.println("account Name : "+((Account) account[customerNumber]).getAccountName());
-			System.out.println("account pin : "+accountPin);  
-			System.out.println("account Balance : "+accountBalance);
-			System.out.println("account ID : "+accountId);
-			
-			// for (int i = 0; i < account.length; i++) {
-			// 	if (customerNumber == ((Account) account[i]).accountId) {
-			// 		System.out.println("Enter your pin number: ");
-			// 		pinNumber = inputAccountPin.nextInt();
-			// 		if (pinNumber == ((Account) account[i]).accountPin) {
-			// 			System.out.println("Login Successful!");
-			// 			System.out.println("Welcome " + ((Account) account[i]).accountName);
-			// 			System.out.println("Your balance is " + ((Account) account[i]).accountBalance);
-			// 		} else {
-			// 			System.out.println("Invalid Pin Number.");
-			// 		}
-			// 	} else {
-			// 		System.out.println("Invalid Customer Number.");
-			// 	}
-			// }
-			welcomeMenu();
-
-			// Account[] account;
-			// account = new Account[2];
-
-			// for (int i = 0; i < account.length; i++) {
-			// 	if (customerNumber == ((Account) account[i]).accountId) {
-			// 		System.out.println("Enter your pin number: ");
-			// 		pinNumber = inputAccountPin.nextInt();
-			// 		if (pinNumber == ((Account) account[i]).accountPin) {
-			// 			System.out.println("Login Successful!");
-			// 			System.out.println("Welcome " + ((Account) account[i]).accountName);
-			// 			System.out.println("Your balance is " + ((Account) account[i]).accountBalance);
-			// 		} else {
-			// 			System.out.println("Invalid Pin Number.");
-			// 		}
-			// 	} else {
-			// 		System.out.println("Invalid Customer Number.");
-			// 	}
-			// }
-
-			
-
-	} catch (InputMismatchException e) {
-		System.out.println("\nError " +e+ " Please try again"); 
-	}
-	}
 
 
 public static class Account {
@@ -178,21 +114,6 @@ public static class Account {
 	private String accountName;
 	private int accountBalance;
 	private List<Account> accountList = new ArrayList<>();
-	
-	public Account(int accountId) {
-		 
-		 
-		// Account[] account;
-		// account = new Account[accountId];
-		
-		// this.accountName = ((Account) account[accountId]).accountName;
-		// this.accountId = ((Account) account[accountId]).accountId;
-		// this.accountPin = ((Account) account[accountId]).accountPin;
-		// this.accountBalance = ((Account) account[accountId]).accountBalance;
-
-	 
-	}	
-
 	
 	public Account(String accountName, int accountId, int accountPin, int accountBalance) {
 
