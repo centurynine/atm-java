@@ -45,6 +45,7 @@ public class Bank {
 	public static void manageAccount() {
 		boolean holderAccount = true;
 		boolean holderLogin = true;
+		int accountCount = 0;
 		System.out.print("\n Enter amount of all account: ");
 		int accountLimit = inputAccountLimit.nextInt();
 		Account[] account;
@@ -60,8 +61,30 @@ public class Bank {
 				int accountPin = inputAccountPin.nextInt();
 				System.out.print(" Enter your account balance: ");
 				int accountBalance = inputAccountBalance.nextInt();
+				if(accountName.trim().isEmpty() || accountId.trim().isEmpty()){
+					System.out.println("Please enter all information.");
+					i--;
+					continue;
+				}
+				if(i == 0){
 				account[i] = new Account(accountName, accountId, accountPin, accountBalance);
-
+				accountCount++;
+				}
+				else{
+					for(int j = 0; j < accountCount; j++){
+						if(accountId.equals(((Account) account[j]).accountId)){
+							System.out.println("Account ID is already exist.");
+							i--;
+							break;
+						}
+						else{
+							account[i] = new Account(accountName, accountId, accountPin, accountBalance);
+							accountCount++;
+							break;
+						}
+					}
+				}
+ 
 			}
 			System.out.println("******************************");
 
