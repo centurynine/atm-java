@@ -72,7 +72,7 @@ public class Bank {
 				}
 				else{
 					for(int j = 0; j < accountCount; j++){
-						if(accountId.equals(((Account) account[j]).accountId)){
+						if(accountId.equals(((Account) account[j]).getAccountId())){
 							System.out.println("Account ID is already exist.");
 							i--;
 							break;
@@ -91,10 +91,10 @@ public class Bank {
 			for (int j = 0; j < accountLimit; j++) {
 				int no = j + 1;
 				System.out.println("\nNo." + no);
-				System.out.println("Account ID = " + ((Account) account[j]).accountId);
-				System.out.println("Account Name = " + ((Account) account[j]).accountName);
-				System.out.println("Account Pin = " + ((Account) account[j]).accountPin);
-				System.out.println("Account Balance = " + ((Account) account[j]).accountBalance);
+				System.out.println("Account ID = " + ((Account) account[j]).getAccountId());
+				System.out.println("Account Name = " + ((Account) account[j]).getAccountName());
+				System.out.println("Account Pin = " + ((Account) account[j]).getAccountPin());
+				System.out.println("Account Balance = " + ((Account) account[j]).getAccountBalance());
 			}
 
 		} catch (InputMismatchException e) {
@@ -110,13 +110,13 @@ public class Bank {
 			holderLogin = false;
 			while(holderAccount == true){
 			for (int k = 0; k < accountLimit; k++) {
-				if (accountLoginId.equals(((Account) account[k]).accountId)) {
-					if (accountLoginPin == ((Account) account[k]).accountPin) {
-						System.out.println(" **** Account Name: " + ((Account) account[k]).accountName + " Account ID: "
-								+ ((Account) account[k]).accountId + " Account Pin: " + ((Account) account[k]).accountPin
-								+ " Account Balance: " + ((Account) account[k]).accountBalance);
+				if (accountLoginId.equals(((Account) account[k]).getAccountId())) {
+					if (accountLoginPin == ((Account) account[k]).getAccountPin()) {
+						System.out.println(" **** Account Name: " + ((Account) account[k]).getAccountName() + " Account ID: "
+								+ ((Account) account[k]).getAccountId() + " Account Pin: " + ((Account) account[k]).getAccountPin()
+								+ " Account Balance: " + ((Account) account[k]).getAccountBalance());
 						System.out.println("****************** ACCOUNT MENU ******************");
-						System.out.println("Welcome : " + ((Account) account[k]).accountName);
+						System.out.println("Welcome : " + ((Account) account[k]).getAccountName());
 						System.out.println(" Type 1 - Check Balance");
 						System.out.println(" Type 2 - Withdraw");
 						System.out.println(" Type 3 - Change account");
@@ -126,17 +126,19 @@ public class Bank {
 					
 						switch (choice) {
 							case 1:
-								System.out.println("Your Balance is " + ((Account) account[k]).accountBalance);
+								System.out.println("Your Balance is " + ((Account) account[k]).getAccountBalance());
 								break;
 							case 2:
 								System.out.print("Enter amount to withdraw: ");
 								int withdraw = inputAccountWithdraw.nextInt();
-								if (withdraw > ((Account) account[k]).accountBalance) {
+								if (withdraw > ((Account) account[k]).getAccountBalance()) {
 									System.out.println("Insufficient Balance");
 								} else {
-									((Account) account[k]).accountBalance -= withdraw;
+									int balance = ((Account) account[k]).getAccountBalance();
+									balance -= withdraw;
+									((Account) account[k]).setAccountBalance(balance);
 									System.out.println("Withdraw Success!");
-									System.out.println("Your Balance is " + ((Account) account[k]).accountBalance);
+									System.out.println("Your Balance is " + ((Account) account[k]).getAccountBalance());
 								}
 								break;
 							case 3:
@@ -165,43 +167,6 @@ public class Bank {
 	}
 	}
 
-	}
+}}
 
-	public static class Account {
-
-		private int accountPin;
-		private String accountId;
-		private String accountName;
-		private int accountBalance;
-
-		public Account(String accountName, String accountId, int accountPin, int accountBalance) {
-
-			this.accountPin = accountPin;
-			this.accountId = accountId;
-			this.accountName = accountName;
-			this.accountBalance = accountBalance;
-
-			System.out.println(" Created!" + " Account Name: " + accountName + " Account ID: " + accountId
-					+ " Account Pin: " + accountPin + " Account Balance: " + accountBalance);
-
-		}
-
-		public int getAccountPin() {
-			return accountPin;
-		}
-
-		public String getAccountId() {
-			return accountId;
-		}
-
-		public String getAccountName() {
-			return accountName;
-		}
-
-		public int getAccountBalance() {
-			return accountBalance;
-		}
-
-	}
-
-}
+	
