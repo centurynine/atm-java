@@ -129,9 +129,9 @@ public class Bank {
 							System.out.println("Welcome : " + ((Account) account[k]).getAccountName());
 							System.out.println(" Type 1 - Check Balance");
 							System.out.println(" Type 2 - Withdraw");
-							System.out.println(" Type 3 - Change account");
-							System.out.println(" Type 4 - Exit");
-							System.out.println(" Type 5 - Deposit");
+							System.out.println(" Type 3 - Deposit");
+							System.out.println(" Type 4 - Change account");
+							System.out.println(" Type 5 - Exit");
 							System.out.print("Choice: ");
 							choice = inputChoice.nextInt();
 							switch (choice) {
@@ -139,31 +139,22 @@ public class Bank {
 								System.out.println("\n === Your Balance is " + ((Account) account[k]).getAccountBalance());
 								break;
 							case 2:
-								System.out.print("\n === Enter amount to withdraw: ");
-								int withdraw = inputAccountWithdraw.nextInt();
-								if (withdraw > ((Account) account[k]).getAccountBalance()) {
-									System.out.println("Insufficient Balance");
-									} else {
-										int balance = ((Account) account[k]).getAccountBalance();
-										balance -= withdraw;
-										((Account) account[k]).setAccountBalance(balance);
-										System.out.println("Withdraw Success!");
-										System.out.println("Your Balance is " + ((Account) account[k]).getAccountBalance());
-									}
+								System.out.println("\n Withdraw.");
+								withdraw(account, k);
 								break;
 							case 3:
+								System.out.println("\n Deposit.");
+								deposit(account, k);
+								break;
+							case 4:
 								System.out.println("\n Change account.");
 								holderAccount = true;
 								holderMenu = false;
 								break;
-							case 4:
+							case 5:
 								System.out.println("\n Exit.");
 								holderAccount = false;
 								holderMenu = false;
-								break;
-							case 5:
-								System.out.println("\n Deposit.");
-								deposit(account, k);
 								break;
 							default:
 								System.out.println("\n Invalid Choice.");
@@ -191,6 +182,21 @@ public class Bank {
 		((Account) account[accountId]).setAccountBalance(balance);
 		System.out.println("Deposit Success!");
 		System.out.println("Your Balance is " + ((Account) account[accountId]).getAccountBalance());
+	}
+
+	public static void withdraw(Account[] account, int accountId) {
+		Scanner inputAccountWithdraw = new Scanner(System.in);
+		System.out.println(" Enter withdraw amount: ");
+		int withdraw = inputAccountWithdraw.nextInt();
+		if (withdraw > ((Account) account[accountId]).getAccountBalance()) {
+			System.out.println("Insufficient Balance");
+		} else {
+			int balance = ((Account) account[accountId]).getAccountBalance();
+			balance -= withdraw;
+			((Account) account[accountId]).setAccountBalance(balance);
+			System.out.println("Withdraw Success!");
+			System.out.println("Your Balance is " + ((Account) account[accountId]).getAccountBalance());
+		}
 	}
 
 }
