@@ -11,12 +11,12 @@ public class Bank {
 	static Scanner inputAccountWithdraw = new Scanner(System.in);
 
 	public static void main(String[] args) {
-
 		welcomeMenu();
 
 	}
 
 	public static void welcomeMenu() {
+
 		boolean end = false;
 		System.out.println("@@@@  Welcome to the RMUTT BANK @@@@");
 		while (end == false) {
@@ -45,12 +45,14 @@ public class Bank {
 	}
 
 	public static void manageAccount() {
+
 		boolean holderAccount = true;
 		int accountCount = 0;
 		System.out.print("\n Enter amount of all account: ");
 		int accountLimit = inputAccountLimit.nextInt();
 		Account[] account;
 		account = new Account[accountLimit];
+
 		try {
 			for (int i = 0; i < accountLimit; i++) {
 				System.out.print("\n No." + (i + 1) + " Account");
@@ -59,7 +61,7 @@ public class Bank {
 				System.out.print(" Enter your account ID: ");
 				String accountId = inputAccountId.nextLine();
 				System.out.print(" Enter your account pin: ");
-				int accountPin = inputAccountPin.nextInt();
+				String accountPin = inputAccountPin.nextLine();
 				System.out.print(" Enter your account balance: ");
 				int accountBalance = inputAccountBalance.nextInt();
 				if (accountName.trim().isEmpty() || accountId.trim().isEmpty()) {
@@ -105,7 +107,7 @@ public class Bank {
 		} catch (InputMismatchException e) {
 			System.out.println("\nError " + e + " Please try again");
 		}
-
+		 
 		int choice = 0;
 		while(holderAccount == true){
 			boolean holderMenu = true;
@@ -113,11 +115,11 @@ public class Bank {
 			System.out.print("\n Enter your account ID: ");
 			String accountLoginId = inputAccountId.nextLine();
 			System.out.print(" Enter your account pin: ");
-			int accountLoginPin = inputAccountPin.nextInt();
+			String accountLoginPin = inputAccountPin.nextLine();
 			System.out.println("\n #################################");
 			for (int k = 0; k < accountLimit; k++) {
 				if (accountLoginId.equals(((Account) account[k]).getAccountId())) {
-					if (accountLoginPin == ((Account) account[k]).getAccountPin()) {
+					if (accountLoginPin.equals(((Account) account[k]).getAccountPin())) {
 						System.out.println("\n **** Login Success!");
 						System.out.println(" **** Account Name: " + ((Account) account[k]).getAccountName() + " Account ID: "
 								+ ((Account) account[k]).getAccountId() + " Account Pin: " + ((Account) account[k]).getAccountPin()
@@ -129,6 +131,7 @@ public class Bank {
 							System.out.println(" Type 2 - Withdraw");
 							System.out.println(" Type 3 - Change account");
 							System.out.println(" Type 4 - Exit");
+							System.out.println(" Type 5 - Deposit");
 							System.out.print("Choice: ");
 							choice = inputChoice.nextInt();
 							switch (choice) {
@@ -158,6 +161,10 @@ public class Bank {
 								holderAccount = false;
 								holderMenu = false;
 								break;
+							case 5:
+								System.out.println("\n Deposit.");
+								deposit(account, k);
+								break;
 							default:
 								System.out.println("\n Invalid Choice.");
 						}
@@ -173,6 +180,17 @@ public class Bank {
 		}
 	}
 
+	}
+
+	public static void deposit(Account[] account, int accountId) {
+		Scanner inputAccountDeposit = new Scanner(System.in);
+		System.out.println(" Enter deposit amount: ");
+		int deposit = inputAccountDeposit.nextInt();
+		int balance = ((Account) account[accountId]).getAccountBalance();
+		balance += deposit;
+		((Account) account[accountId]).setAccountBalance(balance);
+		System.out.println("Deposit Success!");
+		System.out.println("Your Balance is " + ((Account) account[accountId]).getAccountBalance());
 	}
 
 }

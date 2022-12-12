@@ -1,11 +1,11 @@
 public class Account {
 
-    private int accountPin;
+    private String accountPin;
     private String accountId;
     private String accountName;
     private int accountBalance;
 
-    public Account(String accountName, String accountId, int accountPin, int accountBalance) {
+    public Account(String accountName, String accountId, String accountPin, int accountBalance) {
 
         this.accountPin = accountPin;
         this.accountId = accountId;
@@ -17,7 +17,7 @@ public class Account {
 
     }
 
-    public int getAccountPin() {
+    public String getAccountPin() {
         return accountPin;
     }
 
