@@ -70,6 +70,7 @@ public class Bank {
 					case 3:
 						System.out.println("\nExit.");
 						end = true;
+						System.exit(0);
 						break;
 					default:
 						System.out.println("\nInvalid Choice.");
@@ -129,12 +130,12 @@ public class Bank {
 									holderAccount = true;
 									holderMenu = false;
 									Login(account, accountCount);
-
 									break;
 								case 5:
 									System.out.println("\n Exit.");
 									holderAccount = false;
 									holderMenu = false;
+									System.exit(0);
 									break;
 								default:
 									System.out.println("\n Invalid Choice.");
@@ -259,13 +260,12 @@ public class Bank {
 									holderAccount = true;
 									holderMenu = false;
 									Login(account, accountCount);
-
 									break;
 								case 5:
 									System.out.println("\n Exit.");
 									holderAccount = false;
 									holderMenu = false;
-									 
+									System.exit(0);
 									break;
 								default:
 									System.out.println("\n Invalid Choice.");
@@ -328,10 +328,6 @@ public class Bank {
 						}
 					}
 				}
-				System.out.println(i);
-				System.out.println(accountLimit);
- 
-
 			}
 			System.out.println("******************************");
 
@@ -344,8 +340,6 @@ public class Bank {
 				System.out.println("Account Balance = " + ((Account) account[j]).getAccountBalance());
 			}
 			if (accountCount == accountLimit) {
-				System.out.println(accountLimit);
-				System.out.println("Go to menu.");
 				Login(account, accountCount);
 			}
 		} catch (InputMismatchException e) {
