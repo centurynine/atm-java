@@ -1,20 +1,15 @@
-public class Account {
+public class Account extends Person {
 
     private String accountPin;
     private String accountId;
     private String accountName;
     private int accountBalance;
 
-    public Account(String accountName, String accountId, String accountPin, int accountBalance) {
-
+    public Account(String accountPin, String accountId, String accountName, int accountBalance) {
         this.accountPin = accountPin;
         this.accountId = accountId;
         this.accountName = accountName;
         this.accountBalance = accountBalance;
-
-        System.out.println(" Created!" + " Account Name: " + accountName + " Account ID: " + accountId
-                + " Account Pin: " + accountPin + " Account Balance: " + accountBalance);
-
     }
 
     public String getAccountPin() {
@@ -38,5 +33,4 @@ public class Account {
     }
 
 }
-
 

@@ -14,6 +14,9 @@ public class Bank {
 	public static void main(String[] args) {
 		Account[] account;
 		account = new Account[9999];
+		Person[] person;
+		person = new Person[9999];
+
 		welcomeMenu(account);
 	}
 
@@ -48,6 +51,7 @@ public class Bank {
 
 	public static void Login(Account[] account, int accountCount) {
 		boolean end = false;
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		System.out.println("@@@@  Welcome to the RMUTT BANK @@@@");
 		while (end == false) {
 			try {
@@ -82,7 +86,7 @@ public class Bank {
 		}
 	}
 
-	public static void LoginSystem(Account[] account, int accountCount) {
+	public static void LoginSystem(Account[] account, int accountCount) { 
 		int choice = 0;
 		boolean holderAccount = true;
 		while (holderAccount == true) {
@@ -214,73 +218,7 @@ public class Bank {
 			System.out.println("\nError " + e + " Please try again");
 		}
 
-		int choice = 0;
-		while (holderAccount == true) {
-			boolean holderMenu = true;
-			System.out.println("\n ########## Login Menu ##########");
-			System.out.print("\n Enter your account ID: ");
-			String accountLoginId = inputAccountId.nextLine();
-			System.out.print(" Enter your account pin: ");
-			String accountLoginPin = inputAccountPin.nextLine();
-			System.out.println("\n #################################");
-			for (int k = 0; k < accountLimit; k++) {
-				if (accountLoginId.equals(((Account) account[k]).getAccountId())) {
-					if (accountLoginPin.equals(((Account) account[k]).getAccountPin())) {
-						System.out.println("\n **** Login Success!");
-						System.out.println(
-								" **** Account Name: " + ((Account) account[k]).getAccountName() + " Account ID: "
-										+ ((Account) account[k]).getAccountId() + " Account Pin: "
-										+ ((Account) account[k]).getAccountPin()
-										+ " Account Balance: " + ((Account) account[k]).getAccountBalance());
-						while (holderMenu == true) {
-							System.out.println("****************** ACCOUNT MENU ******************");
-							System.out.println("Welcome : " + ((Account) account[k]).getAccountName());
-							System.out.println(" Type 1 - Check Balance");
-							System.out.println(" Type 2 - Withdraw");
-							System.out.println(" Type 3 - Deposit");
-							System.out.println(" Type 4 - Change account");
-							System.out.println(" Type 5 - Exit");
-							System.out.print("Choice: ");
-							choice = inputChoice.nextInt();
-							switch (choice) {
-								case 1:
-									System.out.println(
-											"\n === Your Balance is " + ((Account) account[k]).getAccountBalance());
-									break;
-								case 2:
-									System.out.println("\n Withdraw.");
-									withdraw(account, k);
-									break;
-								case 3:
-									System.out.println("\n Deposit.");
-									deposit(account, k);
-									break;
-								case 4:
-									System.out.println("\n Change account.");
-									holderAccount = true;
-									holderMenu = false;
-									Login(account, accountCount);
-									break;
-								case 5:
-									System.out.println("\n Exit.");
-									holderAccount = false;
-									holderMenu = false;
-									System.exit(0);
-									break;
-								default:
-									System.out.println("\n Invalid Choice.");
-							}
-						}
-					} else {
-
-						System.out.println("\n!!! Invalid Password !!!");
-					}
-
-				} else {
-
-				}
-			}
-		}
+		Login(account, accountLimit);
 
 	}
 
