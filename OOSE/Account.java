@@ -7,6 +7,7 @@ public class Account extends Person {
     private String accountName;
     private int accountBalance;
     private boolean accountInfo;
+    private boolean accountManager;
     private Manager manager;
 
     public Account(String accountPin, String accountId, String accountName, int accountBalance) {
@@ -37,6 +38,10 @@ public class Account extends Person {
         return accountInfo;
     }
 
+    public boolean getAccountManager() {
+        return accountManager;
+    }
+
     public void setAccountBalance(int balance) {
         this.accountBalance = balance;
     }
@@ -53,6 +58,7 @@ public class Account extends Person {
         manager[0].setManager(managerId);
         manager[0].setHaveManager(true); 
         manager[0].setAccount(accountId, accountPin);
+        this.accountManager = true;
         System.out.println("Manager ID: " + manager[0].getManagerId());
     }
 
@@ -62,9 +68,8 @@ public class Account extends Person {
         System.out.println("Have Manager: " + manager.getHaveManager());
     }
 
-    public Object getAccountManager() {
+    public void getAccountManager( Manager manager) {
         
-        return manager;
     }
 
 }

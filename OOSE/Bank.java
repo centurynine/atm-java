@@ -356,7 +356,6 @@ public class Bank {
 			System.out.println(setManagerId);
 			System.out.println (account[i].getAccountId());
 			if (account[i].getAccountId().equals(setManagerId)) {
-
 				String id = ((Account) account[i]).getAccountId();
 				((Account) account[i]).setManager(id);
 				System.out.println("********** Set Manager Success!");
