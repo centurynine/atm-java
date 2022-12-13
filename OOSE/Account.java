@@ -4,6 +4,7 @@ public class Account extends Person {
     private String accountId;
     private String accountName;
     private int accountBalance;
+    private boolean accountInfo;
 
     public Account(String accountPin, String accountId, String accountName, int accountBalance) {
         this.accountPin = accountPin;
@@ -28,8 +29,16 @@ public class Account extends Person {
         return accountBalance;
     }
 
+    public boolean getaccountInfo() {
+        return accountInfo;
+    }
+
     public void setAccountBalance(int balance) {
         this.accountBalance = balance;
+    }
+
+    public void setaccountInfo(boolean accountInfo) {
+        this.accountInfo = accountInfo;
     }
 
 }

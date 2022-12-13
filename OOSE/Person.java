@@ -2,31 +2,31 @@ class Person{
 
 
 
-    private String name;
-    private String address;
-    private String phone;
-    private String email;
+    private String firstName;
+    private String lastName;
+    private String idCard;
+    private String gender;
 
-    public void setAccount(String name, String address, String phone, String email) {
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
+    public void setAccount(String firstName, String lastName, String idCard, String gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.idCard = idCard;
+        this.gender = gender;
     }
     
-    public String getName() {
-        return name;
+    public String getAccountFirstName() {
+        return firstName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getAccountLastName() {
+        return lastName;
     }
 
-    public String getPhone(){
-        return phone;
+    public String getAccountIdCard(){
+        return idCard;
     }
 
-    public String getemail(){
-        return email;
+    public String getAccountGender(){
+        return gender;
     }
 }

@@ -113,7 +113,13 @@ public class Bank {
 							System.out.println(" Type 2 - Withdraw");
 							System.out.println(" Type 3 - Deposit");
 							System.out.println(" Type 4 - Change account");
-							System.out.println(" Type 5 - Exit");
+							if(((Account) account[k]).getaccountInfo() == true) {
+								System.out.println(" Type 5 - Check account information");
+							}
+							else {
+								System.out.println(" Type 5 - Register account information");
+							}
+							System.out.println(" Type 6 - Exit");
 							System.out.print("Choice: ");
 							choice = inputChoice.nextInt();
 							switch (choice) {
@@ -136,6 +142,17 @@ public class Bank {
 									Login(account, accountCount);
 									break;
 								case 5:
+									if(((Account) account[k]).getaccountInfo() == true) {
+										System.out.println(" Type 5 - Check account information");
+										getAccountInfo(account, k);
+										break;
+									}
+									else {
+									System.out.println(" Type 5 - Register account information");
+									setAccountInfo(account, k);
+									break;
+								}
+								case 6:
 									System.out.println("\n Exit.");
 									holderAccount = false;
 									holderMenu = false;
@@ -285,6 +302,35 @@ public class Bank {
 		}
 	}
 
+	public static void setAccountInfo(Account[] account, int accountId) {
+		Scanner inputFirstName = new Scanner(System.in);
+		Scanner inputLastName = new Scanner(System.in);
+		Scanner inputIdCard = new Scanner(System.in);
+		Scanner inputGender = new Scanner(System.in);
+
+		System.out.println(" Enter your first name: ");
+		String fisrtName = inputAccountName.nextLine();
+		System.out.println(" Enter your last name: ");
+		String lastName = inputAccountName.nextLine();
+		System.out.println(" Enter your idcard: ");
+		String idCard = inputAccountName.nextLine();
+		System.out.println(" Enter your gender: ");
+		String gender = inputAccountName.nextLine();
+		((Account) account[accountId]).setAccount(fisrtName, lastName, idCard , gender);
+		((Account) account[accountId]).setaccountInfo(true);
+		System.out.println("********** Set Account Information Success!");
+	}
+
+	public static void getAccountInfo(Account[] account, int accountId){
+		System.out.println("********** Your Account Information **********");
+		System.out.println("First Name = " + ((Account) account[accountId]).getAccountFirstName());
+		System.out.println("Last Name = " + ((Account) account[accountId]).getAccountLastName());
+		System.out.println("ID Card = " + ((Account) account[accountId]).getAccountIdCard());
+		System.out.println("Gender = " + ((Account) account[accountId]).getAccountGender());
+		System.out.println("**********************************************");
+		
+
+	}
 
 	public static void deposit(Account[] account, int accountId) {
 		Scanner inputAccountDeposit = new Scanner(System.in);
