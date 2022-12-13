@@ -351,10 +351,6 @@ public class Bank {
 		System.out.print("\n Enter New Manager ID: ");
 		String setManagerId = inputManager.nextLine();
 		for (int i = 0; i < accountCount; i++) {
-			System.out.println(i);
-			System.out.println(accountCount);
-			System.out.println(setManagerId);
-			System.out.println (account[i].getAccountId());
 			if (account[i].getAccountId().equals(setManagerId)) {
 				String id = ((Account) account[i]).getAccountId();
 				((Account) account[i]).setManager(id);
