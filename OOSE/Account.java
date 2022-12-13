@@ -10,12 +10,11 @@ public class Account extends Person {
     private boolean accountManager;
     private Manager manager;
 
-    public Account(String accountPin, String accountId, String accountName, int accountBalance) {
+    public Account(String accountName, String accountId, String accountPin, int accountBalance) {
         this.accountPin = accountPin;
         this.accountId = accountId;
         this.accountName = accountName;
         this.accountBalance = accountBalance;
-        
     }
 
     public String getAccountPin() {
