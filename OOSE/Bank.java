@@ -1,5 +1,6 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Bank {
 	static Scanner inputChoice = new Scanner(System.in);
@@ -321,17 +322,29 @@ public class Bank {
 		Scanner inputIdCard = new Scanner(System.in);
 		Scanner inputGender = new Scanner(System.in);
 
-		System.out.println(" Enter your first name: ");
+		System.out.print("\n Enter your first name: ");
 		String fisrtName = inputAccountName.nextLine();
-		System.out.println(" Enter your last name: ");
+		System.out.print("\n Enter your last name: ");
 		String lastName = inputAccountName.nextLine();
-		System.out.println(" Enter your idcard: ");
+		System.out.print("\n Enter your idcard: ");
 		String idCard = inputAccountName.nextLine();
-		System.out.println(" Enter your gender: ");
+		System.out.print("\n Enter your gender: ");
 		String gender = inputAccountName.nextLine();
 		((Account) account[accountId]).setAccount(fisrtName, lastName, idCard , gender);
 		((Account) account[accountId]).setaccountInfo(true);
 		System.out.println("********** Set Account Information Success!");
+		System.out.println("********** Your Account Information **********");
+		System.out.println("First Name = " + ((Account) account[accountId]).getAccountFirstName());
+		System.out.println("Last Name = " + ((Account) account[accountId]).getAccountLastName());
+		System.out.println("ID Card = " + ((Account) account[accountId]).getAccountIdCard());
+		System.out.println("Gender = " + ((Account) account[accountId]).getAccountGender());
+		System.out.println("**********************************************");
+		try {
+			TimeUnit.SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
 	}
 
 	public static void getAccountInfo(Account[] account, int accountId){
@@ -341,7 +354,12 @@ public class Bank {
 		System.out.println("ID Card = " + ((Account) account[accountId]).getAccountIdCard());
 		System.out.println("Gender = " + ((Account) account[accountId]).getAccountGender());
 		System.out.println("**********************************************");
-		
+		try {
+			TimeUnit.SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
 
 	}
 
@@ -375,11 +393,24 @@ public class Bank {
 				System.out.println("Manager Pin = " + ((Account) account[i]).getAccountPin());
 				System.out.println("Manager Balance = " + ((Account) account[i]).getAccountBalance());
 				System.out.println("****************************************");
+				try {
+					TimeUnit.SECONDS.sleep(2);
+				} catch (InterruptedException e) {
+	
+					e.printStackTrace();
+				}
 				break;
 			} else if (i == accountCount - 1) {
 				System.out.println("********** No Manager **********");
+				try {
+					TimeUnit.SECONDS.sleep(2);
+				} catch (InterruptedException e) {
+	
+					e.printStackTrace();
+				}
 				break;
 			}
+
 		}
 		Login(account, accountCount);
 	}
