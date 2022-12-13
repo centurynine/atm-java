@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Account extends Person {
 
     private String accountPin;
@@ -5,12 +7,14 @@ public class Account extends Person {
     private String accountName;
     private int accountBalance;
     private boolean accountInfo;
+    private Manager manager;
 
     public Account(String accountPin, String accountId, String accountName, int accountBalance) {
         this.accountPin = accountPin;
         this.accountId = accountId;
         this.accountName = accountName;
         this.accountBalance = accountBalance;
+        
     }
 
     public String getAccountPin() {
@@ -39,6 +43,28 @@ public class Account extends Person {
 
     public void setaccountInfo(boolean accountInfo) {
         this.accountInfo = accountInfo;
+    }
+
+    public void setManager(String managerId) {
+        Manager[] 
+        manager = new Manager[99];
+        Scanner inputAccountId = new Scanner(System.in);
+        manager[0] = new Manager();
+        manager[0].setManager(managerId);
+        manager[0].setHaveManager(true); 
+        manager[0].setAccount(accountId, accountPin);
+        System.out.println("Manager ID: " + manager[0].getManagerId());
+    }
+
+    public void getManagerInformation() {
+        System.out.println("Manager ID: " + manager.getManagerId());
+        System.out.println("Manager Password: " + manager.getManagerPassword());
+        System.out.println("Have Manager: " + manager.getHaveManager());
+    }
+
+    public Object getAccountManager() {
+        
+        return manager;
     }
 
 }

@@ -57,7 +57,8 @@ public class Bank {
 			try {
 				System.out.println("\n Type 1 - Create Account");
 				System.out.println(" Type 2 - Login");
-				System.out.println(" Type 3 - Exit");
+				System.out.println(" Type 3 - Set Manager");
+				System.out.println(" Type 4 - Exit");
 				System.out.print("\nChoice: ");
 				int choice = inputChoice.nextInt();
 				switch (choice) {
@@ -72,10 +73,16 @@ public class Bank {
 						end = true;
 						break;
 					case 3:
+						System.out.println("\nSet Manager.");
+						setManager(account, accountCount);
+						end = true;
+						break;
+					case 4:
 						System.out.println("\nExit.");
 						end = true;
 						System.exit(0);
 						break;
+	
 					default:
 						System.out.println("\nInvalid Choice.");
 				}
@@ -331,6 +338,48 @@ public class Bank {
 		
 
 	}
+
+
+	public static void setManager(Account[] account, int accountCount) {
+		Scanner inputManager = new Scanner(System.in);
+		System.out.print("\n Enter New Manager ID: ");
+		String setManagerId = inputManager.nextLine();
+		for (int i = 0; i < accountCount; i++) {
+			System.out.println(i);
+			System.out.println(accountCount);
+			System.out.println(setManagerId);
+			System.out.println (account[i].getAccountId());
+			if (account[i].getAccountId().equals(setManagerId)) {
+
+				String id = ((Account) account[i]).getAccountId();
+				((Account) account[i]).setManager(id);
+				System.out.println("********** Set Manager Success!");
+				System.out.println(" Manager ID = " + ((Account) account[i]).getAccountId());
+				break;
+			} else if (i == accountCount - 1) {
+				System.out.println("********** Set Manager Fail!");
+				break;
+			}
+
+		}
+	}
+
+	// public static void getManagerInfo(Account[] account, int accountCount) {
+	// 	for (int i = 0; i < accountCount; i++) {
+	// 		if (((Account) account[i]).getAccountManager() != null) {
+	// 			System.out.println("********** Manager Information **********");
+	// 			System.out.println("Manager ID = " + ((Account) account[i]).getAccountId());
+	// 			System.out.println("Manager Name = " + ((Account) account[i]).getAccountName());
+	// 			System.out.println("Manager Pin = " + ((Account) account[i]).getAccountPin());
+	// 			System.out.println("Manager Balance = " + ((Account) account[i]).getAccountBalance());
+	// 			System.out.println("****************************************");
+	// 			break;
+	// 		} else if (i == accountCount - 1) {
+	// 			System.out.println("********** No Manager **********");
+	// 			break;
+	// 		}
+	// 	}
+	// }
 
 	public static void deposit(Account[] account, int accountId) {
 		Scanner inputAccountDeposit = new Scanner(System.in);
