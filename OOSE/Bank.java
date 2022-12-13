@@ -10,7 +10,7 @@ public class Bank {
 	static Scanner inputAccountLimit = new Scanner(System.in);
 	static Scanner inputAccountWithdraw = new Scanner(System.in);
 	static int accountCount = 0;
-
+	boolean haveManager = false;
 	public static void main(String[] args) {
 		Account[] account;
 		account = new Account[9999];
@@ -58,7 +58,8 @@ public class Bank {
 				System.out.println("\n Type 1 - Create Account");
 				System.out.println(" Type 2 - Login");
 				System.out.println(" Type 3 - Set Manager");
-				System.out.println(" Type 4 - Exit");
+				System.out.println(" Type 4 - Get Info Manager");
+				System.out.println(" Type 5 - Exit");
 				System.out.print("\nChoice: ");
 				int choice = inputChoice.nextInt();
 				switch (choice) {
@@ -78,11 +79,16 @@ public class Bank {
 						end = true;
 						break;
 					case 4:
+						System.out.println("\nGet Manager.");
+						getManagerInfo(account, accountCount);
+						end = true;
+						break;
+					case 5:
 						System.out.println("\nExit.");
 						end = true;
 						System.exit(0);
 						break;
-	
+ 
 					default:
 						System.out.println("\nInvalid Choice.");
 				}
@@ -362,24 +368,26 @@ public class Bank {
 			}
 
 		}
+		Login(account, accountCount);
 	}
 
-	// public static void getManagerInfo(Account[] account, int accountCount) {
-	// 	for (int i = 0; i < accountCount; i++) {
-	// 		if (((Account) account[i]).getAccountManager() != null) {
-	// 			System.out.println("********** Manager Information **********");
-	// 			System.out.println("Manager ID = " + ((Account) account[i]).getAccountId());
-	// 			System.out.println("Manager Name = " + ((Account) account[i]).getAccountName());
-	// 			System.out.println("Manager Pin = " + ((Account) account[i]).getAccountPin());
-	// 			System.out.println("Manager Balance = " + ((Account) account[i]).getAccountBalance());
-	// 			System.out.println("****************************************");
-	// 			break;
-	// 		} else if (i == accountCount - 1) {
-	// 			System.out.println("********** No Manager **********");
-	// 			break;
-	// 		}
-	// 	}
-	// }
+	public static void getManagerInfo(Account[] account, int accountCount) {
+		for (int i = 0; i < accountCount; i++) {
+			if (((Account) account[i]).getAccountManager() == true) {
+				System.out.println("********** Manager Information **********");
+				System.out.println("Manager ID = " + ((Account) account[i]).getAccountId());
+				System.out.println("Manager Name = " + ((Account) account[i]).getAccountName());
+				System.out.println("Manager Pin = " + ((Account) account[i]).getAccountPin());
+				System.out.println("Manager Balance = " + ((Account) account[i]).getAccountBalance());
+				System.out.println("****************************************");
+				break;
+			} else if (i == accountCount - 1) {
+				System.out.println("********** No Manager **********");
+				break;
+			}
+		}
+		Login(account, accountCount);
+	}
 
 	public static void deposit(Account[] account, int accountId) {
 		Scanner inputAccountDeposit = new Scanner(System.in);
