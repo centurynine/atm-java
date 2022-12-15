@@ -11,18 +11,13 @@ public class Bank {
 	static Scanner inputAccountLimit = new Scanner(System.in);
 	static Scanner inputAccountWithdraw = new Scanner(System.in);
 	static int accountCount = 0;
-	boolean haveManager = false;
 	public static void main(String[] args) {
 		Account[] account;
 		account = new Account[9999];
-		Person[] person;
-		person = new Person[9999];
-
 		welcomeMenu(account);
 	}
 
 	public static void welcomeMenu(Account[] account) {
-
 		boolean end = false;
 		System.out.println("@@@@  Welcome to the RMUTT BANK @@@@");
 		while (end == false) {
@@ -50,7 +45,7 @@ public class Bank {
 		}
 	}
 
-	public static void Login(Account[] account, int accountCount) {
+	public static void LoginMenu(Account[] account, int accountCount) {
 		boolean end = false;
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		System.out.println("@@@@  Welcome to the RMUTT BANK @@@@");
@@ -158,7 +153,7 @@ public class Bank {
 									System.out.println("\n Change account.");
 									holderAccount = true;
 									holderMenu = false;
-									Login(account, accountCount);
+									LoginMenu(account, accountCount);
 									break;
 								case 6:
 									if(((Account) account[k]).getaccountInfo() == true) {
@@ -254,7 +249,7 @@ public class Bank {
 			System.out.println("\nError " + e + " Please try again");
 		}
 
-		Login(account, accountLimit);
+		LoginMenu(account, accountLimit);
 
 	}
 
@@ -314,7 +309,7 @@ public class Bank {
 				System.out.println("Account Balance = " + ((Account) account[j]).getAccountBalance());
 			}
 			if (accountCount == accountLimit) {
-				Login(account, accountCount);
+				LoginMenu(account, accountCount);
 			}
 		} catch (InputMismatchException e) {
 			System.out.println("\nError " + e + " Please try again");
@@ -386,7 +381,7 @@ public class Bank {
 			}
 
 		}
-		Login(account, accountCount);
+		LoginMenu(account, accountCount);
 	}
 
 	public static void getManagerInfo(Account[] account, int accountCount) {
@@ -417,13 +412,13 @@ public class Bank {
 			}
 
 		}
-		Login(account, accountCount);
+		LoginMenu(account, accountCount);
 	}
 
 	public static void Transferable(Account[] account, int accountId) {
 		Scanner inputAccountTransfer = new Scanner(System.in);
 		Scanner inputAccountAmount = new Scanner(System.in);
-		System.out.print("\n Enter other account to transfer: ");
+		System.out.print("\n Enter other account id to transfer: ");
 		String transferTo = inputAccountTransfer.nextLine();
 		System.out.print("\n Enter transfer amount: ");
 		int amount = inputAccountAmount.nextInt();	
@@ -458,34 +453,6 @@ public class Bank {
 			}
 		}
 	}
-
-	// public static void Transferable(Account[] account, int accountId) {
-	// 	Scanner inputAccountTransfer = new Scanner(System.in);
-	// 	System.out.println(" Enter transfer amount: ");
-	// 	int transfer = inputAccountTransfer.nextInt();
-	// 	if (transfer > ((Account) account[accountId]).getAccountBalance()) {
-	// 		System.out.println("********** Transfer Fail!");
-	// 		System.out.println("********** Your Balance is " + ((Account) account[accountId]).getAccountBalance());
-	// 		try {
-	// 			TimeUnit.SECONDS.sleep(2);
-	// 		} catch (InterruptedException e) {
-
-	// 			e.printStackTrace();
-	// 		}
-	// 	} else {
-	// 		int balance = ((Account) account[accountId]).getAccountBalance();
-	// 		balance -= transfer;
-	// 		((Account) account[accountId]).setAccountBalance(balance);
-	// 		System.out.println("********** Transfer Success!");
-	// 		System.out.println("********** Your Balance is " + ((Account) account[accountId]).getAccountBalance());
-	// 		try {
-	// 			TimeUnit.SECONDS.sleep(2);
-	// 		} catch (InterruptedException e) {
-
-	// 			e.printStackTrace();
-	// 		}
-	// 	}
-	// }
 
 	public static void deposit(Account[] account, int accountId) {
 		Scanner inputAccountDeposit = new Scanner(System.in);

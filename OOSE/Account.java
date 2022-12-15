@@ -67,9 +67,5 @@ public class Account extends Person {
         System.out.println("Have Manager: " + manager.getHaveManager());
     }
 
-    public void getAccountManager( Manager manager) {
-        
-    }
-
 }
 
