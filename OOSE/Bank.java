@@ -126,14 +126,15 @@ public class Bank {
 							System.out.println(" Type 1 - Check Balance");
 							System.out.println(" Type 2 - Withdraw");
 							System.out.println(" Type 3 - Deposit");
-							System.out.println(" Type 4 - Change account");
+							System.out.println(" Type 4 - Transfer");
+							System.out.println(" Type 5 - Change account");
 							if(((Account) account[k]).getaccountInfo() == true) {
-								System.out.println(" Type 5 - Check account information");
+								System.out.println(" Type 6 - Check account information");
 							}
 							else {
-								System.out.println(" Type 5 - Register account information");
+								System.out.println(" Type 6 - Register account information");
 							}
-							System.out.println(" Type 6 - Exit");
+							System.out.println(" Type 7 - Exit");
 							System.out.print("Choice: ");
 							choice = inputChoice.nextInt();
 							switch (choice) {
@@ -150,12 +151,16 @@ public class Bank {
 									deposit(account, k);
 									break;
 								case 4:
+									System.out.println("\n Transfer.");
+									Transferable(account, k);
+									break;
+								case 5:
 									System.out.println("\n Change account.");
 									holderAccount = true;
 									holderMenu = false;
 									Login(account, accountCount);
 									break;
-								case 5:
+								case 6:
 									if(((Account) account[k]).getaccountInfo() == true) {
 										System.out.println(" Type 5 - Check account information");
 										getAccountInfo(account, k);
@@ -166,7 +171,7 @@ public class Bank {
 									setAccountInfo(account, k);
 									break;
 								}
-								case 6:
+								case 7:
 									System.out.println("\n Exit.");
 									holderAccount = false;
 									holderMenu = false;
@@ -414,6 +419,73 @@ public class Bank {
 		}
 		Login(account, accountCount);
 	}
+
+	public static void Transferable(Account[] account, int accountId) {
+		Scanner inputAccountTransfer = new Scanner(System.in);
+		Scanner inputAccountAmount = new Scanner(System.in);
+		System.out.print("\n Enter other account to transfer: ");
+		String transferTo = inputAccountTransfer.nextLine();
+		System.out.print("\n Enter transfer amount: ");
+		int amount = inputAccountAmount.nextInt();	
+		if (amount > ((Account) account[accountId]).getAccountBalance()) {
+			System.out.println("********** Transfer Fail!");
+			System.out.println("********** Your Balance is " + ((Account) account[accountId]).getAccountBalance());
+			try {
+				TimeUnit.SECONDS.sleep(2);
+			} catch (InterruptedException e) {
+
+				e.printStackTrace();
+			}
+		} else {
+
+			int balance = ((Account) account[accountId]).getAccountBalance() - amount;
+			((Account) account[accountId]).setAccountBalance(balance);
+			for (int i = 0; i < account.length; i++) {
+				if (account[i].getAccountId().equals(transferTo)) {
+					int balance2 = ((Account) account[i]).getAccountBalance() + amount;
+					((Account) account[i]).setAccountBalance(balance2);
+					break;
+				}
+			}
+			System.out.println("********** Transfer Success!");
+			System.out.println("********** Your Balance is " + ((Account) account[accountId]).getAccountBalance());
+
+			try {
+				TimeUnit.SECONDS.sleep(2);
+			} catch (InterruptedException e) {
+
+				e.printStackTrace();
+			}
+		}
+	}
+
+	// public static void Transferable(Account[] account, int accountId) {
+	// 	Scanner inputAccountTransfer = new Scanner(System.in);
+	// 	System.out.println(" Enter transfer amount: ");
+	// 	int transfer = inputAccountTransfer.nextInt();
+	// 	if (transfer > ((Account) account[accountId]).getAccountBalance()) {
+	// 		System.out.println("********** Transfer Fail!");
+	// 		System.out.println("********** Your Balance is " + ((Account) account[accountId]).getAccountBalance());
+	// 		try {
+	// 			TimeUnit.SECONDS.sleep(2);
+	// 		} catch (InterruptedException e) {
+
+	// 			e.printStackTrace();
+	// 		}
+	// 	} else {
+	// 		int balance = ((Account) account[accountId]).getAccountBalance();
+	// 		balance -= transfer;
+	// 		((Account) account[accountId]).setAccountBalance(balance);
+	// 		System.out.println("********** Transfer Success!");
+	// 		System.out.println("********** Your Balance is " + ((Account) account[accountId]).getAccountBalance());
+	// 		try {
+	// 			TimeUnit.SECONDS.sleep(2);
+	// 		} catch (InterruptedException e) {
+
+	// 			e.printStackTrace();
+	// 		}
+	// 	}
+	// }
 
 	public static void deposit(Account[] account, int accountId) {
 		Scanner inputAccountDeposit = new Scanner(System.in);
