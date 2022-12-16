@@ -463,6 +463,12 @@ public class Bank {
 		((Account) account[accountId]).setAccountBalance(balance);
 		System.out.println("Deposit Success!");
 		System.out.println("Your Balance is " + ((Account) account[accountId]).getAccountBalance());
+		try {
+			TimeUnit.SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
 	}
 
 	public static void withdraw(Account[] account, int accountId) {
@@ -477,6 +483,12 @@ public class Bank {
 			((Account) account[accountId]).setAccountBalance(balance);
 			System.out.println("Withdraw Success!");
 			System.out.println("Your Balance is " + ((Account) account[accountId]).getAccountBalance());
+		}
+		try {
+			TimeUnit.SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
 		}
 	}
 
