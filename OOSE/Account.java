@@ -12,6 +12,7 @@ public class Account extends Person {
     private String accountManagerId;
     private boolean isManager = false;
 
+
     public Account(String accountName, String accountId, String accountPin, int accountBalance) {
         this.accountPin = accountPin;
         this.accountId = accountId;
@@ -61,7 +62,7 @@ public class Account extends Person {
         manager[0].setAccount(accountId, accountPin);
         this.isManager = true;
         this.accountManager = true;
-        System.out.println("Manager ID: " + manager[0].getManagerId());
+        System.out.println("Manager ID : " + manager[0].getManagerId());
     }
 
     public void getManagerInformation() {
