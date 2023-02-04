@@ -12,13 +12,12 @@ public class Bank {
 	static Scanner inputAccountWithdraw = new Scanner(System.in);
 	static int accountCount = 0;
 	static int btcRate = 16532;
+	static Account[] account = new Account[9999];
 	public static void main(String[] args) {
-		Account[] account;
-		account = new Account[9999];
-		welcomeMenu(account);
+		welcomeMenu();
 	}
 
-	public static void welcomeMenu(Account[] account) {
+	public static void welcomeMenu() {
 		boolean end = false;
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.print("Please enter BTC rate => ");
@@ -36,7 +35,7 @@ public class Bank {
 				switch (choice) {
 					case 1:
 						System.out.print("\nCreate Account.");
-						manageAccount(account, btcRate);
+						manageAccount(account, btcRate );
 						end = true;
 						break;
 					case 2:
