@@ -11,6 +11,7 @@ public class Bank {
 	static Scanner inputAccountLimit = new Scanner(System.in);
 	static Scanner inputAccountWithdraw = new Scanner(System.in);
 	static int accountCount = 0;
+	static int btcRate = 16532;
 	public static void main(String[] args) {
 		Account[] account;
 		account = new Account[9999];
@@ -19,6 +20,12 @@ public class Bank {
 
 	public static void welcomeMenu(Account[] account) {
 		boolean end = false;
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$");
+		System.out.print("Please enter BTC rate => ");
+		Scanner inputBtcRate = new Scanner(System.in);
+		int btcRate = inputBtcRate.nextInt();
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$");
+		System.out.println(btcRate);
 		System.out.println("@@@@  Welcome to the RMUTT BANK @@@@");
 		while (end == false) {
 			try {
@@ -29,7 +36,7 @@ public class Bank {
 				switch (choice) {
 					case 1:
 						System.out.print("\nCreate Account.");
-						manageAccount(account);
+						manageAccount(account, btcRate);
 						end = true;
 						break;
 					case 2:
@@ -45,7 +52,7 @@ public class Bank {
 		}
 	}
 
-	public static void LoginMenu(Account[] account, int accountCount) {
+	public static void LoginMenu(Account[] account, int accountCount, int btcRate) {
 		boolean end = false;
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		System.out.println("@@@@  Welcome to the RMUTT BANK @@@@");
@@ -61,22 +68,22 @@ public class Bank {
 				switch (choice) {
 					case 1:
 						System.out.print("\nCreate Account.");
-						createAccount(account, accountCount);
+						createAccount(account, accountCount, btcRate);
 						end = true;
 						break;
 					case 2:
 						System.out.println("\nLogin.");
-						LoginSystem(account, accountCount);
+						LoginSystem(account, accountCount, btcRate);
 						end = true;
 						break;
 					case 3:
 						System.out.println("\nSet Manager.");
-						setManager(account, accountCount);
+						setManager(account, accountCount, btcRate);
 						end = true;
 						break;
 					case 4:
 						System.out.println("\nGet Manager.");
-						getManagerInfo(account, accountCount);
+						getManagerInfo(account, accountCount, btcRate);
 						end = true;
 						break;
 					case 5:
@@ -95,7 +102,7 @@ public class Bank {
 		}
 	}
 
-	public static void LoginSystem(Account[] account, int accountCount) { 
+	public static void LoginSystem(Account[] account, int accountCount, int btcRate) { 
 		int choice = 0;
 		boolean holderAccount = true;
 		while (holderAccount == true) {
@@ -123,57 +130,79 @@ public class Bank {
 							System.out.println(" Type 3 - Deposit");
 							System.out.println(" Type 4 - Transfer");
 							System.out.println(" Type 5 - Change account");
+							 
 							if(((Account) account[k]).getaccountInfo() == true) {
 								System.out.println(" Type 6 - Check account information");
 							}
 							else {
 								System.out.println(" Type 6 - Register account information");
 							}
-							System.out.println(" Type 7 - Exit");
+							System.out.println(" Type 7 - Withdraw in BTC");
+							System.out.println(" Type 8 - Exit");
+							if(((Account) account[k]).getIsManager() == true) {
+								System.out.println(" Type 9 For Manager Only - Set BTC Rate");
+							}
 							System.out.print("Choice: ");
 							choice = inputChoice.nextInt();
 							switch (choice) {
 								case 1:
+									int balance = ((Account) account[k]).getAccountBalance();  //ตรวจสอบยอดเงิน
+									float withdrawBtc = (((float)balance/btcRate));
 									System.out.println(
-											"\n === Your Balance is " + ((Account) account[k]).getAccountBalance());
+											"\n=== Your Balance is " + ((Account) account[k]).getAccountBalance());
+									System.out.println("=== Your Balance in BTC is " + withdrawBtc);
 									break;
 								case 2:
 									System.out.println("\n Withdraw.");
-									withdraw(account, k);
+									withdraw(account, k, btcRate);
 									break;
 								case 3:
 									System.out.println("\n Deposit.");
-									deposit(account, k);
+									deposit(account, k, btcRate);
 									break;
 								case 4:
 									System.out.println("\n Transfer.");
-									Transferable(account, k);
+									Transferable(account, k, btcRate);
 									break;
 								case 5:
 									System.out.println("\n Change account.");
 									holderAccount = true;
 									holderMenu = false;
-									LoginMenu(account, accountCount);
+									LoginMenu(account, accountCount, btcRate);
 									break;
 								case 6:
 									if(((Account) account[k]).getaccountInfo() == true) {
 										System.out.println(" Type 5 - Check account information");
-										getAccountInfo(account, k);
+										getAccountInfo(account, k, btcRate);
 										break;
 									}
 									else {
 									System.out.println(" Type 5 - Register account information");
-									setAccountInfo(account, k);
+									setAccountInfo(account, k, btcRate);
 									break;
 								}
 								case 7:
+									System.out.println("\n Withdraw in BTC.");
+									withdrawInBTC(account, k, btcRate);
+									break;
+								case 8:
 									System.out.println("\n Exit.");
 									holderAccount = false;
 									holderMenu = false;
 									System.exit(0);
 									break;
+								case 9:
+									if(((Account) account[k]).getIsManager() == true) {
+										System.out.println(" Type 9 For Manager Only - Set BTC Rate");
+										managerChangeRateBTC(account, k, btcRate);
+										break;
+									}
+									else
+									System.out.println("\n Invalid Choice.");
+									break;
 								default:
 									System.out.println("\n Invalid Choice.");
+									break;
 							}
 						}
 					} else {
@@ -189,12 +218,11 @@ public class Bank {
 	}
 
 
-	public static void manageAccount(Account[] account) {
+	public static void manageAccount(Account[] account, int btcRate) {
 
 		boolean holderAccount = true;
 		System.out.print("\n Enter amount of all account: ");
 		int accountLimit = inputAccountLimit.nextInt();
-
 		try {
 			for (int i = 0; i < accountLimit; i++) {
 				System.out.print("\n No." + (i + 1) + " Account");
@@ -249,11 +277,11 @@ public class Bank {
 			System.out.println("\nError " + e + " Please try again");
 		}
 
-		LoginMenu(account, accountLimit);
+		LoginMenu(account, accountLimit, btcRate);
 
 	}
 
-	public static void createAccount(Account[] account, int accountCount) {
+	public static void createAccount(Account[] account, int accountCount, int btcRate) {
 
 		System.out.print("\n Enter amount of all account: ");
 		int accountLimit = inputAccountLimit.nextInt();
@@ -309,14 +337,14 @@ public class Bank {
 				System.out.println("Account Balance = " + ((Account) account[j]).getAccountBalance());
 			}
 			if (accountCount == accountLimit) {
-				LoginMenu(account, accountCount);
+				LoginMenu(account, accountCount, btcRate);
 			}
 		} catch (InputMismatchException e) {
 			System.out.println("\nError " + e + " Please try again");
 		}
 	}
 
-	public static void setAccountInfo(Account[] account, int accountId) {
+	public static void setAccountInfo(Account[] account, int accountId, int btcRate) {
 		Scanner inputFirstName = new Scanner(System.in);
 		Scanner inputLastName = new Scanner(System.in);
 		Scanner inputIdCard = new Scanner(System.in);
@@ -347,7 +375,7 @@ public class Bank {
 		}
 	}
 
-	public static void getAccountInfo(Account[] account, int accountId){
+	public static void getAccountInfo(Account[] account, int accountId, int btcRate){
 		System.out.println("********** Your Account Information **********");
 		System.out.println("First Name = " + ((Account) account[accountId]).getAccountFirstName());
 		System.out.println("Last Name = " + ((Account) account[accountId]).getAccountLastName());
@@ -364,7 +392,7 @@ public class Bank {
 	}
 
 
-	public static void setManager(Account[] account, int accountCount) {
+	public static void setManager(Account[] account, int accountCount, int btcRate) {
 		Scanner inputManager = new Scanner(System.in);
 		System.out.print("\n Enter New Manager ID: ");
 		String setManagerId = inputManager.nextLine();
@@ -381,10 +409,10 @@ public class Bank {
 			}
 
 		}
-		LoginMenu(account, accountCount);
+		LoginMenu(account, accountCount, btcRate);
 	}
 
-	public static void getManagerInfo(Account[] account, int accountCount) {
+	public static void getManagerInfo(Account[] account, int accountCount, int btcRate) {
 		for (int i = 0; i < accountCount; i++) {
 			if (((Account) account[i]).getAccountManager() == true) {
 				System.out.println("********** Manager Information **********");
@@ -412,10 +440,10 @@ public class Bank {
 			}
 
 		}
-		LoginMenu(account, accountCount);
+		LoginMenu(account, accountCount, btcRate);
 	}
 
-	public static void Transferable(Account[] account, int accountId) {
+	public static void Transferable(Account[] account, int accountId, int btcRate) {
 		Scanner inputAccountTransfer = new Scanner(System.in);
 		Scanner inputAccountAmount = new Scanner(System.in);
 		System.out.print("\n Enter other account id to transfer: ");
@@ -442,7 +470,7 @@ public class Bank {
 					break;
 				}
 			}
-			System.out.println("********** Transfer Success!");
+			System.out.println("********** Transfer Success! **********");
 			System.out.println("********** Your Balance is " + ((Account) account[accountId]).getAccountBalance());
 
 			try {
@@ -454,7 +482,7 @@ public class Bank {
 		}
 	}
 
-	public static void deposit(Account[] account, int accountId) {
+	public static void deposit(Account[] account, int accountId, int btcRate) {
 		Scanner inputAccountDeposit = new Scanner(System.in);
 		System.out.println(" Enter deposit amount: ");
 		int deposit = inputAccountDeposit.nextInt();
@@ -471,7 +499,7 @@ public class Bank {
 		}
 	}
 
-	public static void withdraw(Account[] account, int accountId) {
+	public static void withdraw(Account[] account, int accountId, int btcRate) {  // การถอนเงิน
 		Scanner inputAccountWithdraw = new Scanner(System.in);
 		System.out.println(" Enter withdraw amount: ");
 		int withdraw = inputAccountWithdraw.nextInt();
@@ -490,6 +518,45 @@ public class Bank {
 
 			e.printStackTrace();
 		}
+	}
+
+	public static void withdrawInBTC(Account[] account, int accountId, int btcRate) {
+		Scanner inputAccountWithdraw = new Scanner(System.in);
+		System.out.println(" Enter withdraw amount: ");
+		int withdraw = inputAccountWithdraw.nextInt();
+		if (withdraw > ((Account) account[accountId]).getAccountBalance()) {
+			System.out.println("Insufficient Balance");
+		} else {
+			float withdrawBtc = (((float)withdraw/btcRate));
+			int balance = ((Account) account[accountId]).getAccountBalance();
+			balance -= withdraw;
+			((Account) account[accountId]).setAccountBalance(balance);
+			System.out.println("Withdraw Success!");
+			System.out.println("Withdraw btc amount => " + withdrawBtc);
+			System.out.println("Your Balance is " + ((Account) account[accountId]).getAccountBalance());
+		}
+		try {
+			TimeUnit.SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	public static void managerChangeRateBTC(Account[] account, int accountId, int btcRate) {  //การกำหนด Rate ของ BTC
+		Scanner inputAccountWithdraw = new Scanner(System.in);
+		System.out.println(" Enter new rate: ");
+		int newRate = inputAccountWithdraw.nextInt();
+		btcRate = newRate;
+		System.out.println("Change Rate Success!");
+		System.out.println("New Rate is " + btcRate);
+		try {
+			TimeUnit.SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+		LoginMenu(account, account.length, btcRate);
 	}
 
 }
